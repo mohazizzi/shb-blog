@@ -1,95 +1,93 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import Image from "next/image";
+import Link from "next/link";
+import { getPostsMeta } from "../lib/posts";
+import LatestBlogPostItem from "./components/LatestBlogPostItem";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPostsMeta();
+  const imageGallery = [
+    "/images/image01.jpg",
+    "/images/image02.jpg",
+    "/images/image04.jpg",
+    "/images/image05.jpg",
+    "/images/image06.jpg",
+    "/images/image07.jpg",
+    "/images/image08.jpg",
+    "/images/image10.jpg",
+  ];
+
+  if (!posts) {
+    return <p>Sorry, no posts available.</p>;
+  }
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Navbar />
+      <section className="hero">
+        <div className="hero__container">
+          <h2 className="hero__container__title">وبلاگ معماری</h2>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <div className="hero__filter"></div>
+      </section>
+      <main className="home">
+        <section className="home__about">
+          <div className="home__about__container">
+            <Image
+              className="home__about__container__img"
+              src="/images/image02.jpg"
+              width="300"
+              height="300"
+              alt="sdadsfds"
+            />
+            <div className="home__about__container__content">
+              <h2 className="home__about__container__content__title">
+                درباه ی من
+              </h2>
+              <p className="home__about__container__content__text">
+                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
+                استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
+                در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد
+                نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                کتابهای زیادی در شصت و سه درصد گذش
+              </p>
+              <Link
+                href="/about"
+                className="home__about__container__content__cta"
+              >
+                بیشتر بدونید
+              </Link>
+            </div>
+          </div>
+        </section>
+        <section className="home__latestpostslist">
+          <div className="container">
+            <h2 className="home__latestpostslist__title">آخرین پستهای وبلاگ</h2>
+            <div className="home__latestpostslist__list">
+              {posts.slice(0, 3).map((post) => (
+                <LatestBlogPostItem key={post.id} post={post} />
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="home__gallery">
+          <div className="container">
+            <h2 className="home__gallery__title">گالری معماری</h2>
+            <div className="home__gallery__images">
+              {imageGallery.map((image) => (
+                <div
+                  className="home__gallery__images__cart"
+                  style={{ backgroundImage: `url(${image})` }}
+                ></div>
+              ))}
+            </div>
+            <Link href="/gallery" className="home__gallery__cta">
+              صفحه گالری
+            </Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
 }

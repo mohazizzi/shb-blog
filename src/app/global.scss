@@ -1,0 +1,370 @@
+@font-face {
+  font-family: iran-sans-bold;
+  font-weight: 700;
+  font-display: block;
+  src: url(../../public//fonts/iran-sans/IRANSans-Bold-web.eot);
+  src: url(../../public//fonts/iran-sans/IRANSans-Bold-web.eot?#iefix)
+      format("eot"),
+    url(../../public//fonts/iran-sans/IRANSans-Bold-web.woff2) format("woff2"),
+    url(../../public//fonts/iran-sans/IRANSans-Bold-web.woff) format("woff"),
+    url(../../public//fonts/iran-sans/IRANSans-Bold-web.ttf) format("ttf");
+}
+@font-face {
+  font-family: iran-sans-light;
+  font-weight: 400;
+  font-display: block;
+  src: url(../../public//fonts/iran-sans/IRANSans-Light-web.eot);
+  src: url(../../public//fonts/iran-sans/IRANSans-Light-web.woff2)
+      format("woff2"),
+    url(../../public//fonts/iran-sans/IRANSans-Light-web.woff) format("woff"),
+    url(../../public//fonts/iran-sans/IRANSans-Light-web.ttf) format("ttf");
+}
+@font-face {
+  font-family: iran-sans-med;
+  font-weight: 400;
+  font-display: block;
+  src: url(../../public//fonts/iran-sans/IRANSans-Medium-web.eot);
+  src: url(../../public//fonts/iran-sans/IRANSans-Medium-web.eot?#iefix)
+      format("eot"),
+    url(../../public//fonts/iran-sans/IRANSans-Medium-web.woff2) format("woff2"),
+    url(../../public//fonts/iran-sans/IRANSans-Medium-web.woff) format("woff"),
+    url(../../public//fonts/iran-sans/IRANSans-Medium-web.ttf) format("ttf");
+}
+@font-face {
+  font-family: releway;
+  font-display: block;
+  src: url(../../public//fonts/Raleway/Raleway-VariableFont_wght.ttf);
+}
+
+$bg: #1c1d25;
+$primery: #0693e3;
+$text: #b0b2c3;
+$seccess: #14a44d;
+$danger: #dc4c64;
+$color-000: #fff;
+$color-100: #f0f0f1;
+$color-200: #e0e0e2;
+$color-300: #c0c2c5;
+$color-400: #a1a3a8;
+$color-500: #81858b;
+$color-600: #62666d;
+$color-700: #424750;
+$color-800: #232933;
+$color-900: #0c0c0c;
+
+$sans-bold: iran-sans-bold;
+$sans-med: iran-sans-med;
+$sans-light: iran-sans-light;
+$releway: releway;
+
+@mixin container {
+  max-width: 80%;
+  margin: 0 auto;
+
+  @media screen and (max-width: 800px) {
+    max-width: 90%;
+  }
+  @media screen and (max-width: 400px) {
+    max-width: 95%;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $sans-med;
+}
+body {
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+  color: $primery;
+}
+.container {
+  @include container;
+}
+
+.navbar {
+  background-color: $bg;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000000;
+
+  &__container {
+    @include container;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+
+    &__logo__cta {
+      color: $primery;
+
+      &__span {
+        color: $text;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 1.2rem;
+      }
+    }
+    &__nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      &__item {
+        color: $text;
+
+        &:hover {
+          color: $color-200;
+        }
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 0.9rem;
+        gap: 15px;
+      }
+    }
+  }
+}
+
+.footer {
+  padding: 1rem 0;
+  text-align: center;
+  background-color: $bg;
+  color: $primery;
+
+  &__title__span {
+    color: $text;
+  }
+}
+
+.hero {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../../public/images/image12.jpg);
+  background-position: center;
+  background-size: cover;
+  &__container {
+    @include container;
+    position: relative;
+    height: 100%;
+    z-index: 2;
+
+    &__title {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: $color-200;
+      font-size: 3rem;
+      @media screen and (max-width: 800px) {
+        font-size: 2rem;
+      }
+      @media screen and (max-width: 400px) {
+        font-size: 1.5rem;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  &__filter {
+    position: absolute;
+    background-color: #0c0c0c;
+    opacity: 0.5;
+    inset: 0;
+  }
+}
+
+.home__about__container {
+  @include container;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+
+  &__content {
+    max-width: 500px;
+
+    &__title {
+      color: $color-900;
+      font-family: $sans-bold;
+    }
+    &__text {
+      color: $color-700;
+      margin: 1rem 0;
+    }
+    &__cta {
+      text-decoration: underline;
+    }
+  }
+
+  @media screen and (max-width: 1050px) {
+    &__content__title {
+      font-size: 1.2rem;
+    }
+    &__content__text {
+      font-size: 0.9rem;
+    }
+    &__content__cta {
+      font-size: 0.9rem;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    flex-direction: column;
+    text-align: center;
+  }
+  @media screen and (max-width: 400px) {
+    &__img {
+      width: 280px;
+      height: 280px;
+    }
+    &__content__title {
+      font-size: 1rem;
+    }
+    &__content__text {
+      font-size: 0.8rem;
+      margin: 0.5rem 0;
+    }
+    &__content__cta {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.home__latestpostslist {
+  padding: 2rem 0;
+  background-color: $color-100;
+
+  &__title {
+    color: $color-900;
+    text-align: center;
+  }
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 1rem;
+  }
+}
+.latestpost {
+  background-color: $color-000;
+  color: $color-800;
+  box-shadow: 1px 0px 6px 1px $color-600;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &__ditail {
+    padding: 0.5rem;
+
+    &__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &__date {
+        font-size: 0.8rem;
+        color: $color-600;
+      }
+    }
+    &__tags {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+
+      &__cta {
+        color: $color-700;
+      }
+    }
+    &__cta {
+      font-size: 0.9rem;
+      text-decoration: underline;
+    }
+  }
+  @media screen and (max-width: 350px) {
+    &__ditail__title {
+      font-size: 1rem;
+
+      &__date {
+        font-size: 0.7rem;
+      }
+    }
+    &__ditail__tags {
+      font-size: 0.8rem;
+    }
+    &__ditail__cta {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.home__gallery {
+  padding: 2rem 0;
+
+  &__title {
+    text-align: center;
+    color: $color-900;
+  }
+  &__cta {
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+  }
+  &__images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.5rem 0;
+
+    &__cart {
+      width: 100px;
+      height: 300px;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: $color-500;
+      background-position: center;
+      background-size: cover;
+      transition: all 0.5s linear;
+
+      &:hover {
+        width: 300px;
+      }
+    }
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+
+      &__cart {
+        width: 300px;
+        height: 100px;
+
+        &:hover {
+          height: 300px;
+        }
+      }
+    }
+    @media screen and (max-width: 700px) {
+      &__cart {
+        width: 280px;
+        height: 100px;
+
+        &:hover {
+          width: 280px;
+          height: 280px;
+        }
+      }
+    }
+  }
+}
