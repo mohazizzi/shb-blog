@@ -13,6 +13,9 @@ export default function Navbar() {
           <Link href="/" className="navbar__container__nav__item">
             خانه
           </Link>
+          <Link href="/about" className="navbar__container__nav__item">
+            درباره من
+          </Link>
           <Link href="/blog" className="navbar__container__nav__item">
             وبلاگ
           </Link>

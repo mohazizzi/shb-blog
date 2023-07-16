@@ -1,4 +1,9 @@
 import { compileMDX } from "next-mdx-remote/rsc";
+import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
+import rehypeHighlight from "rehype-highlight/lib";
+import rehypeSlug from "rehype-slug";
+
+import CustomImage from "@/app/components/CustomImage";
 
 type Filetree = {
   tree: [
@@ -30,12 +35,29 @@ export async function getPostByName(
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
+    description: string;
+    image: string;
     date: string;
     tags: string[];
   }>({
     source: rawMDX,
+    components: {
+      CustomImage,
+    },
     options: {
       parseFrontmatter: true,
+      mdxOptions: {
+        rehypePlugins: [
+          rehypeHighlight,
+          rehypeSlug,
+          [
+            rehypeAutolinkHeadings,
+            {
+              behavior: "wrap",
+            },
+          ],
+        ],
+      },
     },
   });
 
@@ -45,6 +67,8 @@ export async function getPostByName(
     meta: {
       id,
       title: frontmatter.title,
+      description: frontmatter.description,
+      image: frontmatter.image,
       date: frontmatter.date,
       tags: frontmatter.tags,
     },

@@ -1,5 +1,7 @@
 type Meta = {
   id: string;
+  description: string;
+  image: string;
   title: string;
   date: string;
   tags: string[];

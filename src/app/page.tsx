@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { getPostsMeta } from "../lib/posts";
-import LatestBlogPostItem from "./components/LatestBlogPostItem";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+
+import LatestBlogPosts from "./components/LatestBlogPosts";
+import Hero from "./components/Hero";
+
+export const revalidate = 86400;
 
 export default async function Home() {
   const posts = await getPostsMeta();
@@ -23,13 +26,7 @@ export default async function Home() {
   }
   return (
     <>
-      <Navbar />
-      <section className="hero">
-        <div className="hero__container">
-          <h2 className="hero__container__title">وبلاگ معماری</h2>
-        </div>
-        <div className="hero__filter"></div>
-      </section>
+      <Hero customHeight={100} title="وبلاگ معماری" />
       <main className="home">
         <section className="home__about">
           <div className="home__about__container">
@@ -42,7 +39,7 @@ export default async function Home() {
             />
             <div className="home__about__container__content">
               <h2 className="home__about__container__content__title">
-                درباه ی من
+                درباره ی من
               </h2>
               <p className="home__about__container__content__text">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
@@ -60,22 +57,14 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <section className="home__latestpostslist">
-          <div className="container">
-            <h2 className="home__latestpostslist__title">آخرین پستهای وبلاگ</h2>
-            <div className="home__latestpostslist__list">
-              {posts.slice(0, 3).map((post) => (
-                <LatestBlogPostItem key={post.id} post={post} />
-              ))}
-            </div>
-          </div>
-        </section>
+        <LatestBlogPosts />
         <section className="home__gallery">
           <div className="container">
             <h2 className="home__gallery__title">گالری معماری</h2>
             <div className="home__gallery__images">
-              {imageGallery.map((image) => (
+              {imageGallery.map((image, index) => (
                 <div
+                  key={index}
                   className="home__gallery__images__cart"
                   style={{ backgroundImage: `url(${image})` }}
                 ></div>
@@ -87,7 +76,6 @@ export default async function Home() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }
