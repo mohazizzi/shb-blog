@@ -1,8 +1,14 @@
 import "./global.scss";
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+// Font files can be colocated inside of `pages`
+const myFont = localFont({
+  src: "../../public/fonts/iran-sans/IRANSans-Medium-web.woff",
+});
 
 export const metadata: Metadata = {
   title: "SHB Architecture",
@@ -16,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl">
-      <body>
+      <body style={myFont.style}>
         <Navbar />
         {children}
         <Footer />
